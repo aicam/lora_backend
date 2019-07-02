@@ -78,4 +78,40 @@ router.get('/add_sensor/:sensorID/:sensorName/:period/:long/:lat/:username', che
         });
     });
 });
+
+router.post('/schedule/',function (req,res,next) {
+    var username = req.body.username;
+    var gpname = req.body.gpname;
+    var plan = req.body.plan;
+    var filter = {
+        username: username,
+        gpname: gpname
+    };
+    var update = {
+        $set : {
+            plan: plan
+        }
+    };
+    mongoClient.connect(url,function (err, db) {
+        var dbo = db.db("lora_server");
+        dbo.collection("groups_plan").updateOne(filter, update, function (err, resp) {
+            if (err) throw err;
+            db.close();
+            return res.json({"status": 1});
+        });
+    })
+});
+
+router.get('/get_groups/:username', function (req, res, next) {
+    mongoClient.connect(url, function (err, db) {
+        var dbo = db.db("lora_server");
+        var names = [];
+        dbo.collection("groups").find({username: req.params.username}).toArray(function (err, result) {
+            result.map(item => {
+               names.push(item.gpname);
+            });
+            return res.json(names);
+        });
+    });
+});
 module.exports = router;
