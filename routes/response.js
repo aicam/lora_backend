@@ -12,6 +12,7 @@ router.post('/send_data/:sensorID/', function (req, res, next) {
         //tabdile binary be string inja bayad bashe , tarjihan ye function bashe behtare ;)
 
         var decoded_data = ''; // variable that will replace with decrypted encoded_data
+        console.log(decoded_data); // test decryption
         /* code e ziri male mongodb hast ke age mongodb dashti runesh kon age na ham mohem nist , in oke */
         // var data_insert = {sensorID: req.body.sensorID, data: decoded_data, time_received: new Date()};
         // dbo.collection('sensors_data').insertOne(data_insert);
