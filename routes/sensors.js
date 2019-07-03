@@ -35,6 +35,7 @@ router.get('/sensor_data/:sensorID', checkAuth, function (req, res, next) {
         });
     });
 });
+
 router.get('/add_relay/:relayID/:name/:long/:lat/:user', checkAuth, function (req, res, next) {
     mongoClient.connect(url, function (err, db) {
         if (err) throw err;
@@ -106,12 +107,37 @@ router.get('/get_groups/:username', function (req, res, next) {
     mongoClient.connect(url, function (err, db) {
         var dbo = db.db("lora_server");
         var names = [];
-        dbo.collection("groups").find({username: req.params.username}).toArray(function (err, result) {
+        dbo.collection("groups_plan").find({username: req.params.username}).toArray(function (err, result) {
             result.map(item => {
                names.push(item.gpname);
             });
             return res.json(names);
         });
     });
+});
+
+router.get('/get_relays/:username', function (req,res,next) {
+   mongoClient.connect(url, function (err, db) {
+       var dbo = db.db("lora_server");
+       var names = [];
+       dbo.collection("relay").find({user: req.params.username}).toArray(function (err, result) {
+          result.map(item => {
+              names.push({name: item.name, id: item.relayID});
+          });
+          return res.json(names);
+       });
+   })
+});
+
+router.post('/add_group/', function (req,res,next) {
+   mongoClient.connect(url, function (err, db) {
+       var dbo = db.db("lora_server");
+       var names = JSON.parse(req.body.relays);
+       names.map(item => {
+           var ins = {gpname: req.body.gpname, relayID: item};
+          dbo.collection("groups").insertOne(ins);
+       });
+       return res.json({status:1});
+   });
 });
 module.exports = router;
