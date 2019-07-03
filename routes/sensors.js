@@ -80,7 +80,7 @@ router.get('/add_sensor/:sensorID/:sensorName/:period/:long/:lat/:username', che
     });
 });
 
-router.post('/schedule/',function (req,res,next) {
+router.post('/schedule/',checkAuth ,function (req,res,next) {
     var username = req.body.username;
     var gpname = req.body.gpname;
     var plan = req.body.plan;
@@ -103,7 +103,7 @@ router.post('/schedule/',function (req,res,next) {
     })
 });
 
-router.get('/get_groups/:username', function (req, res, next) {
+router.get('/get_groups/:username',checkAuth, function (req, res, next) {
     mongoClient.connect(url, function (err, db) {
         var dbo = db.db("lora_server");
         var names = [];
@@ -116,7 +116,7 @@ router.get('/get_groups/:username', function (req, res, next) {
     });
 });
 
-router.get('/get_relays/:username', function (req,res,next) {
+router.get('/get_relays/:username',checkAuth, function (req,res,next) {
    mongoClient.connect(url, function (err, db) {
        var dbo = db.db("lora_server");
        var names = [];
@@ -129,7 +129,7 @@ router.get('/get_relays/:username', function (req,res,next) {
    })
 });
 
-router.post('/add_group/', function (req,res,next) {
+router.post('/add_group/',checkAuth, function (req,res,next) {
    mongoClient.connect(url, function (err, db) {
        var dbo = db.db("lora_server");
        var names = JSON.parse(req.body.relays);

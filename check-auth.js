@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     jwt.verify(token, "SePSepsEPsEpAicaICAIC");
     next();
   } catch (error) {
-    console.log(req.headers.Authorization);
+    console.log(req.headers.authorization);
     res.status(401).json({ message: "Auth failed!" });
   }
 };
