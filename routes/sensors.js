@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = "mongodb+srv://aicam:021021ali@loraserver-g7s1o.azure.mongodb.net/test?retryWrites=true&w=majority";
 const checkAuth = require('../check-auth');
 /* GET users listing. */
 router.get('/sensors/:username', checkAuth, function (req, res, next) {
@@ -58,8 +58,8 @@ router.get('/add_relay/:relayID/:name/:long/:lat/:user', checkAuth, function (re
 });
 
 
-router.get('/add_sensor/:sensorID/:sensorName/:period/:long/:lat/:username', checkAuth, function (req, res, next) {
-    mongoClient.connect(url, function (err, db) {
+router.get('/add_sensor/:sensorID/:sensorName/:period/:long/:lat/:username', function (req, res, next) {
+    mongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
         if (err) throw err;
         var dbo = db.db("lora_server");
         var new_sensor = {

@@ -6,13 +6,12 @@ var url = "mongodb://localhost:27017/";
 router.get('/', function(req, res, next) {
     var mqtt = require('mqtt');
     //doker connection
-    var client  = mqtt.connect('mqtt://broker.hivemq.com:1883',{ useNewUrlParser: true });
+    var client  = mqtt.connect('mqtt://io.lpwandata.com:1883',{ useNewUrlParser: true, username: 'sepantopAdmin', password: '5epanT0p_Adm1n' });
 
     client.on('connect', function () {
-        client.subscribe('presence', function (err) {
+        client.subscribe('application/#', function (err) {
             if (!err) {
                 console.log("connected");
-                client.publish('presence', 'Hello mqtt')
             }
         })
     });
