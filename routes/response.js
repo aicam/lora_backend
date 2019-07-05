@@ -15,7 +15,7 @@ router.post('/send_data/:sensorID/', function (req, res, next) {
         console.log(decoded_data); // test decryption
         res.send("ok bitch :)))");
         /* code e ziri male mongodb hast ke age mongodb dashti runesh kon age na ham mohem nist , in oke */
-        var data_insert = {sensorID: req.body.sensorID, data: req.body.data, time_received: new Date()};
+        var data_insert = {sensorID: req.params.sensorID, data: req.body.data, time_received: new Date()};
         dbo.collection('sensors_data').insertOne(data_insert);
     });
 });
