@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoClient = require('mongodb').MongoClient;
 var moment = require('jalali-moment');
-var url = "mongodb://localhost:27018";
+var url = "mongodb://localhost:27017";
 
 //var url = "mongodb+srv://aicam:021021ali@loraserver-g7s1o.azure.mongodb.net/test?retryWrites=true&w=majority";
 function decode(Encoded_data, key) {
