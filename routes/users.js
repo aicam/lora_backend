@@ -7,8 +7,6 @@ var url = "mongodb://localhost:27017/";
 
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
-    bcrypt.hash("021021",10).then((result) => console.log(result));
-    console.log(req.body);
     mongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("lora_server");

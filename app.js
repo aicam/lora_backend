@@ -10,6 +10,7 @@ var response_server = require('./routes/response');
 
 var app = express();
 app.use((req, res, next) => {
+	console.log(req.toString());
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
         "Access-Control-Allow-Headers",

@@ -24,3 +24,13 @@ router.get('/', function(req, res, next) {
     })
 });
 module.exports = router;
+
+// var day_plan_by_time = [];
+// item.split(':')[1].replace('"','').replace('"','').split('/').map(item2 => {
+//
+//     day_plan_by_time.push({"startHour": item2.split('-')[0].split(':')[0]
+//         ,"startMinute":item2.split('-')[0].split(':')[1],
+//         "endHour": item2.split('-')[1].split(':')[0],
+//         "endMinute": item2.split('-')[1].split(':')[1]});
+// });
+// day_plan[day.toString()] = day_plan_by_time;
