@@ -12,7 +12,7 @@
     "cors": "^2.8.5",
     "express": "~4.13.1",
     "jalali-moment": "^3.3.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.2.7",
     "mqtt": "^3.0.0"
   }
